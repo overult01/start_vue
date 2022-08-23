@@ -9,49 +9,25 @@
 </head>
 <body>
     <div id="app">
-
-        <!-- 이벤트 v-on:click -->
-        <button v-on:click="alert">Click Me</button>
-        <br>
-        {{year}}<br>
-        <button v-on:click="plus">더하기</button>
-        <button v-on:click="minus">빼기</button>
-        <br>
-        <form v-on:submit="submit">
-<!-- v-on은 @와 동일  -->
-            <!-- <input type="text" :value="text" @keyup="updateText"><br> -->
-            
-            <!-- 양 방향 데이터 바인딩일 때는 v-model -->
-            <input type="text" v-model="text"><br>
-            {{ text }}
-            <button type="submit">Submit</button>
-        </form>
+        <button @click="changeMessage"></button>
+        {{ reversedMessage }}
     </div>  
     <script>
         new Vue({
             el: '#app',
             data: {
-                year: 2018,
-                text: 'text'
+                message: '헬로우'
             },
             methods: {
-                alert() {
-                    alert('Hi Jungmin!')
-                },
-                plus(){
-                    this.year++;
-                },
-                minus(){
-                    this.year--;
-                },
-                submit() {
-                    alert('submitted');
-                    console.log('hello');
-                },
-                // 단 방향 데이터 바인딩일 때 
-                // updateText(event){
-                //     this.text = event.target.value;
-                // }
+                changeMessage(){
+                    this.message = '코지코더';
+                }
+            },
+            // computed 속성은 캐싱을 하고, methods 속성은 캐싱을 하지 않는다.
+            computed: {
+                reversedMessage() {
+                    return this.message.split('').reverse().join('')
+                }
             }
         })
     </script>
