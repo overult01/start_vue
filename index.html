@@ -18,7 +18,12 @@
         <button v-on:click="minus">빼기</button>
         <br>
         <form v-on:submit="submit">
-            <input type="text"><br>
+<!-- v-on은 @와 동일  -->
+            <!-- <input type="text" :value="text" @keyup="updateText"><br> -->
+            
+            <!-- 양 방향 데이터 바인딩일 때는 v-model -->
+            <input type="text" v-model="text"><br>
+            {{ text }}
             <button type="submit">Submit</button>
         </form>
     </div>  
@@ -26,7 +31,8 @@
         new Vue({
             el: '#app',
             data: {
-                year: 2018
+                year: 2018,
+                text: 'text'
             },
             methods: {
                 alert() {
@@ -41,7 +47,11 @@
                 submit() {
                     alert('submitted');
                     console.log('hello');
-                }
+                },
+                // 단 방향 데이터 바인딩일 때 
+                // updateText(event){
+                //     this.text = event.target.value;
+                // }
             }
         })
     </script>
