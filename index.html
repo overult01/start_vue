@@ -5,38 +5,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뷰 기초 익히기</title>
+    <style>
+        .red{
+            color: red;
+        }
+
+        .bold{
+            font-weight: bold;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
 </head>
 <body>
     <div id="app">
-        {{ message }}<br>
-        <button @click="changeMessage"></button>
-        {{ updated }}
+        <div :class="{ red: isRed }">Hello</div>
+        <button @click="update">Click</button>
     </div>  
     <script>
         new Vue({
             el: '#app',
             data: {
-                message: '헬로우',
-                updated: '아니요'
+                isRed: false
             },
             methods: {
-                changeMessage(){
-                    this.message = '코지코더';
-                }
+                update() {
+                    this.isRed = !this.isRed;
+                }                
             },
-            // computed 속성은 캐싱을 하고, methods 속성은 캐싱을 하지 않는다.
-            computed: {
-                reversedMessage() {
-                    return this.message.split('').reverse().join('')
-                }
-            },
-            // message부분을 watch하고 있다가, 값이 바뀌면 updated부분의 값이 바뀜
-            watch: {
-                message(newVal, oldVal){
-                    this.updated = '네';
-                }
-            }
         })
     </script>
 </body>
